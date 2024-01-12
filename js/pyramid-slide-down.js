@@ -2,32 +2,36 @@ function generateNewArrayForCompute(pyramid) {
   const newArrayForCompute = Array(pyramid.length).fill();
 
   for (let i = 0; i < pyramid.length; i++) {
-    newArrayForCompute[i] = Array(pyramid[i]);
+    newArrayForCompute[i] = pyramid[i];
   }
 
   return newArrayForCompute;
 }
 
-function getSumFromEdges(pyramid, newArrayForCompute) {
+function getSumFromEdges(newArrayForCompute) {
   const array = [...newArrayForCompute];
-  for (let i = 1; i < pyramid.length; i++) {
-    array[i][0] = pyramid[i][0] + pyramid[i - 1][0];
+  for (let i = 1; i < array.length; i++) {
+    array[i][0] = array[i][0] + array[i - 1][0];
   }
 
-  for (let i = 1; i < pyramid.length; i++) {
-    array[i][array[i].length - 1] = pyramid[i].at(-1) + pyramid[i - 1].at(-1);
+  for (let i = 1; i < array.length; i++) {
+    array[i][array[i].length - 1] = array[i].at(-1) + array[i - 1].at(-1);
   }
 
   return array;
 }
 
-function getSumFromNotEdgesPosition(pyramid, newArrayForCompute) {
+function getSumFromNotEdgesPosition(newArrayForCompute) {
   const array = [...newArrayForCompute];
-  for (let i = 2; i < pyramid.length; i++) {
-    for (let j = 1; j < pyramid[i].length; j++) {
-      const leftNext = array[i][j - 1];
+  for (let i = 2; i < newArrayForCompute.length; i++) {
+    for (let j = 1; j < newArrayForCompute[i].length - 1; j++) {
+      const topLeftNext = array[i - 1] ? array[i - 1][j - 1] : 0;
       const topNext = array[i - 1] ? array[i - 1][j] : 0;
-      array[i][j] = Math.max(leftNext, topNext);
+      array[i][j] =
+        Math.max(
+          isNaN(topLeftNext) ? 0 : topLeftNext,
+          isNaN(topNext) ? 0 : topNext
+        ) + array[i][j];
     }
   }
 
@@ -48,11 +52,13 @@ function getMaxSumFromLastRow(newArrayForCompute) {
 * 1. First find sum from left and right edges 
 * 2. Then iterate in position that not belongs to the edges and generate the max sum for the position (we have to get the max from the parents)
 ¨* 3. Finally in the last row we have to get the max sum , computed before
+*
+* Another solutions with: ReduceRight
 */
 function longestSlideDown(pyramid) {
   let newArrayForCompute = generateNewArrayForCompute(pyramid);
-  newArrayForCompute = getSumFromEdges(pyramid, newArrayForCompute);
-  newArrayForCompute = getSumFromNotEdgesPosition(pyramid, newArrayForCompute);
+  newArrayForCompute = getSumFromEdges(newArrayForCompute);
+  newArrayForCompute = getSumFromNotEdgesPosition(newArrayForCompute);
 
   return getMaxSumFromLastRow(newArrayForCompute);
 }

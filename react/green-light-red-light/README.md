@@ -1,30 +1,14 @@
-# React + TypeScript + Vite
+# Excercise Question
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Green light / red light( https://www.reacterry.com/portal/challenges/green-light--red-light ) 
 
-Currently, two official plugins are available:
+- In this coding challenge you’re asked to write a small web game that recreates the iconic green light / red light game from Squid Game. The game will display a box that changes color between green and red. The goal of the game is to get to 15 clicks on the green box within 15 seconds.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- You should write all of your game logic in the GreenLightRedLight component. By default, it should display a button with the text “Start Game”. This button will be used to start the game.
 
-## Expanding the ESLint configuration
+- Once the button is pressed, your app should display a box that changes its color on a random basis. Ideally, it should change no sooner that 1s and no later than 2s.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- If the users click on the red box, they failed the game and you should display Game Over! message and end the game immediately.
 
-- Configure the top-level `parserOptions` property like this:
+- If the users click on the green box, you should increment their score count by 1. If they manage to click the green box 15 times within 15 seconds, they win and you should display You win! message.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

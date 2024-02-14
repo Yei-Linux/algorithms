@@ -1,11 +1,35 @@
-const lowerVocabulary = 'abcdefghijkmnopqrstuvwxyz';
+const lowerVocabulary = 'abcdefghijklmnopqrstuvwxyz';
 const isIncludeInMyLowerVocabulary = (letter) =>
   lowerVocabulary.includes(letter);
 
 const getRepeatedLetterByNumber = (letter, size) =>
   letter.padStart(size, letter);
 
-const sortStore = (store) => store;
+/**
+ * Sorting by this format: 2:eeeee/2:yy/=:hh/=:rr
+ * @param {*} store
+ */
+const sortStore = (str) => {
+  const items = str.split('/');
+  const sorted = items.sort((a, b) => {
+    const [leftA, rightA] = a.split(':');
+    const [leftB, rightB] = b.split(':');
+
+    if (rightB.length === rightA.length) {
+      if (leftA < leftB) {
+        return -1;
+      }
+      if (leftA > leftB) {
+        return 1;
+      }
+      return rightA.localeCompare(rightB);
+    }
+
+    return rightB.length - rightA.length;
+  });
+
+  return sorted.join('/');
+};
 
 const groupByLowerLetter = (sGroup, sGroupName, store) => {
   sGroup.split('').forEach((letter) => {
@@ -33,7 +57,6 @@ function mix(s1, s2) {
 
   groupByLowerLetter(s1, 's1', store);
   groupByLowerLetter(s2, 's2', store);
-  store = sortStore(store);
 
   const stringMix = Object.entries(store)
     .map(([letter, group]) => {
@@ -62,7 +85,8 @@ function mix(s1, s2) {
     .filter((item) => item !== undefined)
     .join('/');
 
-  return stringMix;
+  const stringMixSorted = sortStore(stringMix);
+  return stringMixSorted;
 }
 
 module.exports = { mix };

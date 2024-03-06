@@ -2,31 +2,42 @@ import { useState } from 'react';
 import './App.css';
 import { Board } from './Board';
 import { Token } from './Tokens';
+import { handleDecideWhoWins } from './helper';
 
 type PlayerTurn = 'A' | 'B';
+const SIZE = 3;
+
+export type Tokens = Record<string, Token> | null;
 
 function App() {
+  const [winner, setWinner] = useState<PlayerTurn | null>(null);
   const [playerTurn, setPlayerTurn] = useState<PlayerTurn>('A');
-  const [tokens, setToken] = useState<Record<string, Token> | null>(null);
+  const [tokens, setToken] = useState<Tokens>(null);
 
-  const isValidMove = (position: number) => {
+  const isValidMove = (position: string) => {
     return !tokens?.[position];
   };
 
   const makeToken = () => ({ type: playerTurn });
 
-  const handleMakeAMove = (position: number) => {
+  const handleMakeAMove = (position: string) => {
     const isValid = isValidMove(position);
     if (!isValid) return;
 
     const tokenResult = makeToken();
-    setToken((prev) => ({ ...prev, [position]: tokenResult }));
+    const newTokens = { ...tokens, [position]: tokenResult };
+    setToken(newTokens);
+    handleDecideWhoWins(newTokens, SIZE, setWinner);
     setPlayerTurn((prev) => (prev === 'A' ? 'B' : 'A'));
   };
 
   return (
     <div>
-      <Board size={3} onClickCell={handleMakeAMove} tokens={tokens} />
+      {winner ? (
+        <p>The winner is the player {winner}</p>
+      ) : (
+        <Board size={SIZE} onClickCell={handleMakeAMove} tokens={tokens} />
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ require('../nesting-structrure-comparison');
 const { assert } = require('./helper');
 
 describe('Tests', () => {
-  it.only('first test', () => {
+  it('first test', () => {
     assert.isTrue(
       [1, 1, 1].sameStructureAs([2, 2, 2]),
       '[1,1,1] same as [2,2,2]'

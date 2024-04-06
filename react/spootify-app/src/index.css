@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --primary: 236, 100%, 77%;
+  --primary-foreground: 0, 0%, 100%;
+
+  --secondary: 321, 100%, 72%;
+  --secondary-foreground: 321, 100%, 72%;
+
+  --neutral: 	34, 50%, 84%;
+  --neutral-foreground: 	34, 50%, 84%;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+

@@ -25,8 +25,8 @@ export const DoneBoard = () => {
     <Board
       title="Done Tasks"
       id="doneBard"
-      onDrop={(e) => handleDropTask(e, handleUpdateTask)}
       onDragOver={handleAllowDragAndDrop}
+      onDrop={(e) => handleDropTask(e, handleUpdateTask)}
     >
       {tasks
         .filter(({ state }) => state === 'done')
@@ -36,7 +36,6 @@ export const DoneBoard = () => {
             key={id}
             id={id}
             onDragStart={handlerDragStart}
-            onDragEnd={() => handleUpdateTask(id)}
           />
         ))}
     </Board>

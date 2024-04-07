@@ -8,8 +8,6 @@ export const handleDropTask = (
   e: React.DragEvent<HTMLUListElement>,
   updateHook: (id: string) => void
 ) => {
-  e.preventDefault();
-
   try {
     const id = e.dataTransfer.getData('text');
     const taskElement = document.querySelector('#' + id);

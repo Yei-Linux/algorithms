@@ -25,8 +25,8 @@ export const DoingBoard = () => {
     <Board
       title="Doing Tasks"
       id="doingBoard"
-      onDrop={(e) => handleDropTask(e, handleUpdateTask)}
       onDragOver={handleAllowDragAndDrop}
+      onDrop={(e) => handleDropTask(e, handleUpdateTask)}
     >
       {tasks
         .filter(({ state }) => state === 'pending')

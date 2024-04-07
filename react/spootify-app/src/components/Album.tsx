@@ -5,7 +5,7 @@ type Album = {
 
 export const Album = ({ image, title }: Album) => {
   return (
-    <div className="bg-white flex flex-col gap-2 items-center cursor-pointer">
+    <div className="bg-white flex flex-col gap-2 items-center cursor-pointer max-w-[80px]">
       <img
         src={image}
         alt={title}

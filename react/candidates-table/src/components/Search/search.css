@@ -1,0 +1,7 @@
+.search__input {
+    min-width: 300px;
+    outline: none;
+    border: none;
+    padding-bottom: 5px;
+    border-bottom: 3px solid var(--primary);
+}

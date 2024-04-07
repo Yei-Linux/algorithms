@@ -5,7 +5,8 @@ const templateAreaPluginConfig = {
     layout: ['aside main main'],
   },
   gridTemplateColumns: {
-    layout: '20% 80%',
+    wide: '20% 80%',
+    slim: '10% 90%',
   },
   gridTemplateRows: {
     layout: `auto`,
@@ -38,4 +39,7 @@ export default {
     },
   },
   plugins: [require('@savvywombat/tailwindcss-grid-areas')],
+  variants: {
+    gridTemplateAreas: ['responsive'],
+  },
 };

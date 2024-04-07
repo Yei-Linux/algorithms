@@ -28,7 +28,7 @@ export const SectionView = ({
       </div>
     </header>
     <main className="w-full">
-      <div className="overflow-auto">{children}</div>
+      <div className="w-full overflow-x-auto max-w-[70vw]">{children}</div>
     </main>
   </div>
 );

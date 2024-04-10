@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #8576FF;
+  --primary-foreground: #8576FF;
+
+  --secondary: #7BC9FF;
+  --secondary-foreground: #7BC9FF;
+
+  --neutral: #DDDDDD;
+  --neutral-foreground: #DDDDDD;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}

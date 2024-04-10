@@ -33,8 +33,8 @@ type Message = {
 
 export const Message = ({ text, variant }: Message) => {
   return (
-    <div className={wrapperMessage({ position: variant })}>
+    <li className={wrapperMessage({ position: variant })}>
       <div className={message({ color: variant })}>{text}</div>
-    </div>
+    </li>
   );
 };

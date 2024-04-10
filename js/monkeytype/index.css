@@ -1,0 +1,68 @@
+:root {
+    --primary: #323437;
+    --secondary: #e2b714;
+    --muted: #656669;
+    --danger: red;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: monospace;
+}
+
+.wrapper {
+    background-color: var(--primary);
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.typying__container {
+    padding: 10px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.typying__board {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 20px;
+}
+
+.word {
+    display: flex;
+    gap: 2px;
+    color: var(--muted);
+}
+
+.letter {
+    border-width: 2px;
+}
+
+.letter.incorrect {
+    color: var(--danger);
+}
+.letter.correct {
+    color: white;
+}
+.letter.active {
+    box-sizing: border-box;
+    animation-name: cursor-animation;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes cursor-animation {
+    from {
+        border-left: 2px solid var(--secondary);
+    }
+    to {
+        border-left: 2px solid var(--primary);
+    }
+}

@@ -1,0 +1,26 @@
+.people_table {
+    margin: auto;
+}
+
+.people_table td, .people_table th {
+    padding: 10px;
+}
+
+.people_table_remove {
+    cursor: pointer;
+}
+
+.filters {
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.filters li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+

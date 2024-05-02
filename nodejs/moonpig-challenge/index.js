@@ -28,11 +28,31 @@ app.get('/api/despatchDate', async (req, res) => {
     }
 
     const productsArr = Array.isArray(productIds) ? productIds : [productIds];
-    const products = await Product.findAll();
 
+    const onedayToAdd = 24 * 60 * 60 * 1000;
+    let timeStamp = new Date().getTime();
+
+    for (let productId of productsArr) {
+      const product = await Product.findOne({
+        where: { id: productId },
+        include: [{ model: Supplier, as: 'supplier' }],
+      });
+      const supplier = product.supplier;
+      const leadingTime = supplier.leadingTime;
+      const dispatchDateTime = new Date().getTime() + leadingTime * onedayToAdd;
+
+      if (timeStamp < dispatchDateTime) {
+        timeStamp = dispatchDateTime;
+      }
+    }
+
+    let dispatchDate = new Date(timeStamp);
+    const day = dispatchDate.getDay();
+    const msToAdd = day === 0 ? onedayToAdd : day === 6 ? 2 * onedayToAdd : 0;
+
+    dispatchDate = new Date(timeStamp + msToAdd);
     res.status(200).send({
-      date: '',
-      products,
+      date: dispatchDate,
     });
   } catch (error) {
     res.status(500).json({

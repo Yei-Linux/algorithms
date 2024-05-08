@@ -1,8 +1,9 @@
 import { DataTypes } from 'sequelize';
-import { sequelizeDB } from '../sequelize';
+import { db } from '../index.js';
 import { UserModel } from './User.model.js';
+import { CategoryModel } from './Category.model.js';
 
-export const NoteModel = sequelizeDB.define(
+export const NoteModel = db.define(
   'Note',
   {
     note: DataTypes.STRING,
@@ -12,7 +13,7 @@ export const NoteModel = sequelizeDB.define(
   }
 );
 
-export const NoteCategoriesModel = sequelizeDB.define(
+export const NoteCategoriesModel = db.define(
   'NoteCategories',
   {
     noteId: {

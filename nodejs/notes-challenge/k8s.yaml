@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: notes
+spec:
+  containers:
+    - name: notes
+      image: notes-app/notes-ms:0.0.1
+  tolerations:
+    - key: "example-key"
+      operator: "Exists"
+      effect: "NoSchedule"

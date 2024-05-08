@@ -6,8 +6,9 @@ export class UserRouter {
     const router = Router();
     const controller = new UserController();
 
-    router.use((req, res, next) => {
+    router.use('*', (req, res, next) => {
       console.log('user router');
+      next();
     });
 
     router.get('/', controller.getAll);
@@ -18,5 +19,7 @@ export class UserRouter {
 
     router.post('/signup', controller.signup);
     router.post('/signin', controller.signin);
+
+    return router;
   };
 }

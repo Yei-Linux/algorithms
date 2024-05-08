@@ -1,5 +1,7 @@
 import 'dotenv/config';
-import { get } from 'env-var';
+import envVar from 'env-var';
+
+const { get } = envVar;
 
 const DB_ENVS = {
   DB_NAME: get('DB_NAME').required().asString(),

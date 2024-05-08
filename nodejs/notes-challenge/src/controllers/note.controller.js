@@ -1,22 +1,54 @@
+import { NotesDao } from '../repository/notes.dao.js';
+
 export class NoteController {
-  getAll = (req, res, next) => {
+  noteDao;
+
+  constructor() {
+    this.noteDao = new NotesDao();
+  }
+
+  getAll = async (req, res, next) => {
     try {
-    } catch (error) {}
+      const data = await this.noteDao.getAll();
+      res.status(200).send({ data });
+    } catch (error) {
+      next(error);
+    }
   };
-  getOne = (req, res, next) => {
+  getOne = async (req, res, next) => {
     try {
-    } catch (error) {}
+      const { id } = req.params;
+      const data = await this.noteDao.getOne(id);
+      res.status(200).send({ data });
+    } catch (error) {
+      next(error);
+    }
   };
-  create = (req, res, next) => {
+  create = async (req, res, next) => {
     try {
-    } catch (error) {}
+      const data = await this.noteDao.create(req.body);
+      res.status(201).send({ data });
+    } catch (error) {
+      next(error);
+    }
   };
-  update = (req, res, next) => {
+  update = async (req, res, next) => {
     try {
-    } catch (error) {}
+      const { id } = req.params;
+      const data = await this.noteDao.update(id, req.body);
+      res.status(200).send({ data });
+    } catch (error) {
+      next(error);
+    }
   };
-  delete = (req, res, next) => {
+  delete = async (req, res, next) => {
     try {
-    } catch (error) {}
+      const { id } = req.params;
+      await this.noteDao.delete(id);
+      res.status(200).send({ message: 'Item removed' });
+    } catch (error) {
+      next(error);
+    }
   };
 }
+ 

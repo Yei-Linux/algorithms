@@ -8,12 +8,15 @@ export class NoteRouter {
 
     router.use((req, res, next) => {
       console.log('note router');
+      next();
     });
 
     router.get('/', controller.getAll);
     router.get('/:id', controller.getOne);
     router.post('/', controller.create);
     router.put('/:id', controller.update);
-    router.delete('/', controller.delete);
+    router.delete('/:id', controller.delete);
+
+    return router;
   };
 }

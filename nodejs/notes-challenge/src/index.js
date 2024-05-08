@@ -1,4 +1,4 @@
-import { app } from './app.js';
+import { app } from './server.js';
 import { dbInstance } from './config/database/index.js';
 
 (async () => {

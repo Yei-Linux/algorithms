@@ -1,5 +1,13 @@
 import { Router } from 'express';
 import { CategoryController } from '../controllers/category.controller.js';
+import { validateBodyMiddleware } from '../middlewares/validate-body.middleware.js';
+import {
+  categoryGetParamsValidator,
+  categoryCreateValidator,
+  categoryDeleteParamsValidator,
+  categoryUpdateParamsValidator,
+} from '../validator/category.validator.js';
+import { validatorParamsMiddleware } from '../middlewares/validator-params.middleware.js';
 
 export class CategoryRouter {
   static router = () => {
@@ -8,12 +16,31 @@ export class CategoryRouter {
 
     router.use((req, res, next) => {
       console.log('category router');
+      next();
     });
 
     router.get('/', controller.getAll);
-    router.get('/:id', controller.getOne);
-    router.post('/', controller.create);
-    router.put('/:id', controller.update);
-    router.delete('/', controller.delete);
+    router.get(
+      '/:id',
+      validatorParamsMiddleware(categoryGetParamsValidator),
+      controller.getOne
+    );
+    router.post(
+      '/',
+      validateBodyMiddleware(categoryCreateValidator),
+      controller.create
+    );
+    router.put(
+      '/:id',
+      validatorParamsMiddleware(categoryUpdateParamsValidator),
+      controller.update
+    );
+    router.delete(
+      '/:id',
+      validatorParamsMiddleware(categoryDeleteParamsValidator),
+      controller.delete
+    );
+
+    return router;
   };
 }

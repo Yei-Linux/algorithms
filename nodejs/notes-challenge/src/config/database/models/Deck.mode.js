@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
-import { sequelizeDB } from '../sequelize';
+import { db } from '../index.js';
 import { NoteModel } from './Note.model.js';
 import { UserModel } from './User.model.js';
 
-export const DeckModel = sequelizeDB.define('Deck', {
+export const DeckModel = db.define('Deck', {
   name: DataTypes.STRING,
 });
 

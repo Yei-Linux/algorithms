@@ -4,7 +4,10 @@ import { db } from '../index.js';
 export const CategoryModel = db.define(
   'Category',
   {
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
   },
   { tableName: 'categories' }
 );

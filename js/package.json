@@ -4,7 +4,7 @@
   "description": "",
   "main": "pyramid-slide-down.js",
   "scripts": {
-    "test": "jest chess-fun.test.js"
+    "test": "jest greed-is-good.test.js"
   },
   "author": "",
   "license": "ISC",

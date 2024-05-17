@@ -1,3 +1,18 @@
+function betterSolution(brd) {
+  brd = [].concat(...brd.map((row) => row.concat(NaN)));
+
+  brd.forEach(
+    (sq, i, brd) =>
+      sq % 2 &&
+      [[-10, -8, 10, 8], , [-9, -1, 1, 9]][sq + 1].forEach((dir) => {
+        for (let j = i + dir; brd[j] % 2 === 0; j += dir) {
+          brd[j] = 2;
+        }
+      })
+  );
+  return 64 - brd.filter(Boolean).length;
+}
+
 /**
  * https://www.codewars.com/kata/58a3b28b2f949e21b3000001/train/javascript
  * @param {*} chessboard
@@ -5,16 +20,14 @@
  */
 function bishopsAndRooks(chessboard) {
   for (let i = 0; i < chessboard.length; i++) {
-    for (let j = 0; j < chessboard.length; j++) {
+    for (let j = 0; j < chessboard[i].length; j++) {
       const square = chessboard[i][j];
       const arePieces = [1, -1].includes(square);
       if (!arePieces) continue;
       const directions = directionsByPiece[square === 1 ? 'R' : 'B'];
-      searchPieces(i, j, chessboard, directions);
+      searchPieces(i, j, chessboard, [...directions]);
     }
   }
-
-  console.log('test', chessboard);
 
   const counterNoOccupiedSquare = chessboard.reduce((acc, arr) => {
     const sum = arr.reduce((acc, item) => {
@@ -44,26 +57,21 @@ const methods = (i, j) => ({
 });
 
 function verifySquare(chessboard, i, j, direction) {
-  if (i < 0 || i >= 8 || j < 0 || j >= 8) {
-    return false;
+  if (i < 0 || i >= chessboard.length || j < 0 || j >= 8) {
+    return 'shouldbe-occupied';
+  }
+
+  if ([1, -1].includes(chessboard[i][j])) {
+    return 'shouldbe-occupied';
   }
 
   const [newI, newJ] = methods(i, j)[direction];
-  if (chessboard[i][j] === 2) {
-    return false;
+  const squareState = verifySquare(chessboard, newI, newJ, direction);
+  if (squareState === 'shouldbe-occupied') {
+    chessboard[i][j] = 2;
+    return 'shouldbe-occupied';
   }
-  if (chessboard[i][j] === 0) {
-    const thereIsAPiece = verifySquare(chessboard, newI, newJ, direction);
-    if (thereIsAPiece) {
-      chessboard[i][j] = 2;
-      return true;
-    }
-  }
-  if ([1, -1].includes(chessboard[i][j])) {
-    return true;
-  }
-
-  return false;
+  return 'not-occupied';
 }
 
 function searchPieces(i, j, chessboard, directions) {
@@ -74,4 +82,4 @@ function searchPieces(i, j, chessboard, directions) {
   }
 }
 
-module.exports = { bishopsAndRooks };
+module.exports = { bishopsAndRooks, betterSolution };

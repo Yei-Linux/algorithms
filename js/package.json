@@ -4,7 +4,7 @@
   "description": "",
   "main": "pyramid-slide-down.js",
   "scripts": {
-    "test": "jest adjust-light.test.js"
+    "test": "jest palindrome.test.js"
   },
   "author": "",
   "license": "ISC",

@@ -11,5 +11,7 @@ describe('Valid Copy', () => {
     );
     assert.isTrue(checkIsValidCopy('Santa Claus', 's#+:. c:. s'));
     assert.isNotTrue(checkIsValidCopy('Santa Claus', 's#+:.#c:. s'));
+    assert.isNotTrue(checkIsValidCopy('s+#:.#c:. s', 's#+:.#c:. s'));
+    assert.isTrue(checkIsValidCopy('3 #egalos', '3 .+:# #:'));
   });
 });

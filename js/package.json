@@ -4,7 +4,7 @@
   "description": "",
   "main": "pyramid-slide-down.js",
   "scripts": {
-    "test": "jest calculate-time.test.js"
+    "test": "jest next-smaller-digits.test.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,0 +1,7 @@
+@import url("./reset.css");
+@import url("./variables.css");
+
+body, #root {
+    background-color: black;
+    height: 100vh;
+}

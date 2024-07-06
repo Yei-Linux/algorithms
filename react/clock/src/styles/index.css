@@ -1,0 +1,9 @@
+@import url("./reset.css");
+
+body {
+    height: 100vh;
+}
+
+#root {
+    height: inherit;
+}

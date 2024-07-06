@@ -1,0 +1,34 @@
+.clock {
+    position: relative;
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
+
+    border: 5px solid red;
+    background-color: black;
+    margin: auto;
+
+    transform: rotate(180deg);
+}
+
+.clock_indicator {
+    position: absolute;
+    width: 5px;
+    left: 50%;
+    top: 50%;
+
+    transform-origin: top;
+}
+
+.clock_seconds {
+    height: 60px;
+    background-color: red;
+}
+.clock_minutes {
+    height: 70px;
+    background-color: yellow;
+}
+.clock_hours {
+    height: 90px;
+    background-color: white;
+}

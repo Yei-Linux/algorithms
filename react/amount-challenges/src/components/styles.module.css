@@ -1,0 +1,29 @@
+.button {
+    padding: 4px;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+.button_start {
+    background-color: green;
+}
+.button_stop {
+    background-color: red;
+}
+.button_reset {
+    background-color: yellow;
+}
+
+.searchbox {
+    display: flex;
+    gap: 10px;
+}
+
+.cities {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}

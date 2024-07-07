@@ -1,0 +1,17 @@
+.home {
+    padding: 1rem;
+}
+
+.character_items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.next_page_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

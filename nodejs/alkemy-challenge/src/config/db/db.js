@@ -1,9 +1,10 @@
-import { DatabaseError } from '../errors/db.error.js';
-import { MoviesModel } from '../models/Movies.model.js';
-import { GendersModel } from '../models/Genders.model.js';
-import { CharactersModel } from '../models/Characters.model.js';
+import { DatabaseError } from '../../errors/db.error.js';
+import { MoviesModel } from '../../models/Movies.model.js';
+import { GendersModel } from '../../models/Genders.model.js';
+import { CharactersModel } from '../../models/Characters.model.js';
 import { seedData } from './db.seed.js';
-import { MovieCharactersModel } from '../models/MovieCharacters.model.js';
+import { MovieCharactersModel } from '../../models/MovieCharacters.model.js';
+import { UsersModel } from '../../models/Users.model.js';
 
 export const dbConfig = async (db, seed = false) => {
   try {
@@ -22,6 +23,9 @@ export const dbConfig = async (db, seed = false) => {
 
     GendersModel.hasMany(MoviesModel, { foreignKey: 'genderId' });
     MoviesModel.belongsTo(GendersModel, { foreignKey: 'genderId' });
+
+    UsersModel.hasMany(MoviesModel, { foreignKey: 'createdUserId' });
+    MoviesModel.belongsTo(UsersModel, { foreignKey: 'createdUserId' });
 
     seed && (await seedData());
 

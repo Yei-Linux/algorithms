@@ -1,6 +1,6 @@
-import { CharactersModel } from '../models/Characters.model.js';
-import { GendersModel } from '../models/Genders.model.js';
-import { MoviesModel } from '../models/Movies.model.js';
+import { CharactersModel } from '../../models/Characters.model.js';
+import { GendersModel } from '../../models/Genders.model.js';
+import { MoviesModel } from '../../models/Movies.model.js';
 
 export const seedData = async () => {
   try {

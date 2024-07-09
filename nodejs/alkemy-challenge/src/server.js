@@ -2,8 +2,8 @@ import { config } from 'dotenv';
 config();
 
 import { app } from './app.js';
-import { dbConfig } from './config/db.js';
-import { sequelize } from './config/db.instance.js';
+import { dbConfig } from './config/db/db.js';
+import { sequelize } from './config/db/db.instance.js';
 
 const port = process.env.PORT;
 (async () => {

@@ -5,6 +5,8 @@ import { CharactersModel } from '../../models/Characters.model.js';
 import { seedData } from './db.seed.js';
 import { MovieCharactersModel } from '../../models/MovieCharacters.model.js';
 import { UsersModel } from '../../models/Users.model.js';
+import { UserTokensModel } from '../../models/UserTokens.models.js';
+import { AccountModel } from '../../models/Account.model.js';
 
 export const dbConfig = async (db, seed = false) => {
   try {
@@ -26,6 +28,20 @@ export const dbConfig = async (db, seed = false) => {
 
     UsersModel.hasMany(MoviesModel, { foreignKey: 'createdUserId' });
     MoviesModel.belongsTo(UsersModel, { foreignKey: 'createdUserId' });
+
+    UsersModel.hasOne(UserTokensModel, {
+      foreignKey: { name: 'userId', allowNull: false },
+    });
+    UserTokensModel.belongsTo(UsersModel, {
+      foreignKey: { name: 'userId', allowNull: false },
+    });
+
+    UsersModel.hasMany(AccountModel, {
+      foreignKey: { name: 'userId', allowNull: false },
+    });
+    AccountModel.belongsTo(UsersModel, {
+      foreignKey: { name: 'userId', allowNull: false },
+    });
 
     seed && (await seedData());
 

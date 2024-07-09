@@ -14,12 +14,16 @@ export const UsersModel = sequelize.define(
     },
     password: {
       type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: null,
     },
     fullName: {
       type: DataTypes.STRING,
     },
     age: {
       type: DataTypes.INTEGER,
+      allowNull: null,
+      defaultValue: 18,
       validate: {
         min: 18,
         max: 200,

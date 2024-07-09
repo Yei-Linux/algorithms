@@ -1,19 +1,31 @@
 import { sign, verify } from 'jsonwebtoken';
+import { InternalServerError } from '../errors/internal-server.error';
+import { envs } from '../config/env.js';
 
 export class JWTHelper {
-  static JWT_SEED = process.env.JWT_SEED;
-  static JWT_ACCESS_TOKEN_EXPIRATION = process.env.JWT_ACCESS_TOKEN_EXPIRATION;
-  static JWT_REFRESH_TOKEN_EXPIRATION =
-    process.env.JWT_REFRESH_TOKEN_EXPIRATION;
+  static JWT_SEED = envs.jwtSeed;
+  static JWT_ACCESS_TOKEN_EXPIRATION = envs.jwtAccessTokenExp;
+  static JWT_REFRESH_TOKEN_EXPIRATION = envs.jwtRefreshTokenExp;
+  static JWT_ERROR_MALFORMED = 'JsonWebTokenError';
+  static JWT_ERROR_EXPIRED = 'TokenExpiredError';
+
+  static get getExpirationSeconds() {
+    try {
+      const minutes = +JWTHelper.JWT_ACCESS_TOKEN_EXPIRATION.replace(/m/g, '');
+      return minutes * 60;
+    } catch (error) {
+      throw new InternalServerError('Expiration value is invalid');
+    }
+  }
 
   static errorHandler(error) {
     if (error.name === 'TokenExpiredError') {
       console.warn('Token expired');
-      return;
+      return error.name;
     }
     if (error.name === 'JsonWebTokenError') {
       console.warn('Token malformed');
-      return;
+      return error.name;
     }
   }
 

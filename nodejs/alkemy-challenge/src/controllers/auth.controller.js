@@ -1,4 +1,6 @@
+import passport from 'passport';
 import { AuthService } from '../services/auth.service.js';
+import { envs } from '../config/env.js';
 
 export class AuthController {
   constructor() {
@@ -8,15 +10,36 @@ export class AuthController {
   signup = (req, res, next) => {
     try {
       const body = req.body;
-      this.authService.createUser(body);
+      const user = this.authService.createUser(body);
+      res.status(200).send({ data: user });
     } catch (error) {
       next(error);
     }
   };
 
-  signin = () => {};
+  signin = (req, res, next) => {
+    passport.authenticate('local', { session: false }, (error, data) => {
+      if (error) {
+        next(error);
+      }
 
-  signinGoogle = () => {};
+      res.status(200).send({ data });
+    })(req, res, next);
+  };
+
+  signinGoogleCallback = (req, res, next) => {
+    passport.authenticate('google', {}, (error, data) => {
+      if (error) {
+        return res.redirect(`${envs.frontendUrl}`);
+      }
+
+      req.login(response, { session: false }, () =>
+        res.redirect(
+          `${envs.frontendUrl}?${new URLSearchParams(data).toString()}`
+        )
+      );
+    })(req, res, next);
+  };
 
   refreshToken = () => {};
 }

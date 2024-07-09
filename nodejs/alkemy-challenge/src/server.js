@@ -4,8 +4,10 @@ config();
 import { app } from './app.js';
 import { dbConfig } from './config/db/db.js';
 import { sequelize } from './config/db/db.instance.js';
+import { envs } from './config/env.js';
 
-const port = process.env.PORT;
+const port = envs.serverPort;
+
 (async () => {
   try {
     await dbConfig(sequelize, true);

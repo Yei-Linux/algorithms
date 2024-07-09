@@ -2,12 +2,13 @@ import { config } from 'dotenv';
 config();
 
 import { Sequelize } from 'sequelize';
+import { envs } from '../env.js';
 
 export const DB_CONFIG = {
-  database: process.env.DB_NAME,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
+  database: envs.dbName,
+  username: envs.dbUserName,
+  password: envs.dbPassword,
+  host: envs.dbHost,
 };
 
 export const sequelize = new Sequelize(
@@ -17,6 +18,6 @@ export const sequelize = new Sequelize(
   {
     dialect: 'postgres',
     host: DB_CONFIG.host,
-    port: process.env.DB_PORT,
+    port: envs.dbPort,
   }
 );

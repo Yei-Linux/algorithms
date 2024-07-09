@@ -5,12 +5,12 @@ export class UserTokensService {
   async refresh(refreshToken) {}
 
   async upsert({ id: userId, email, fullName }) {
-    const accessToken = JWTHelper.sign({ id: userId, email, fullName });
-    const refreshToken = JWTHelper.sign({ id: userId, email, fullName });
+    const accessToken = await JWTHelper.sign({ id: userId, email, fullName });
+    const refreshToken = await JWTHelper.sign({ id: userId, email, fullName });
     const expired = new Date();
     expired.setSeconds(expired.getSeconds() + JWTHelper.getExpirationSeconds);
 
-    const result = await UserTokensModel.upsert({
+    const [result] = await UserTokensModel.upsert({
       userId,
       accessToken,
       refreshToken,

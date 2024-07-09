@@ -1,5 +1,5 @@
 import { hash, compare } from 'bcrypt';
-import { BadRequestError } from '../errors/bad-request.error';
+import { BadRequestError } from '../errors/bad-request.error.js';
 
 export class CryptHelper {
   static SALT_ROUNDS = 10;

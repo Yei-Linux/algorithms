@@ -1,3 +1,23 @@
+/**
+ * @swagger
+ * /api/v1/auth/sign-up:
+ *  post:
+ *   summary: Signup
+ *   description: Signup
+ *   produces:
+ *     - application/json
+ *   parameters:
+ *     - in: body
+ *       schema:
+ *         type: object
+ *         properties:
+ *           email:
+ *             type: string
+ *   response:
+ *     201:
+ *       description: Created!
+ */
+
 import { Router } from 'express';
 import { AuthController } from '../controllers/auth.controller.js';
 import { validationBody } from '../middlewares/validation-body.middleware.js';

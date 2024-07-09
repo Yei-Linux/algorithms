@@ -1,6 +1,8 @@
-import { sign, verify } from 'jsonwebtoken';
-import { InternalServerError } from '../errors/internal-server.error';
+import pkg from 'jsonwebtoken';
+import { InternalServerError } from '../errors/internal-server.error.js';
 import { envs } from '../config/env.js';
+
+const { sign, verify } = pkg;
 
 export class JWTHelper {
   static JWT_SEED = envs.jwtSeed;
@@ -42,7 +44,7 @@ export class JWTHelper {
       const decoded = verify(token, JWTHelper.JWT_SEED);
       return decoded;
     } catch (error) {
-      JWTHelper.errorHandler(error);
+      return JWTHelper.errorHandler(error);
     }
   }
 }

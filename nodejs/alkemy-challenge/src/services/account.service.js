@@ -1,4 +1,4 @@
-import { AccountModel } from '../models/Account.model';
+import { AccountModel } from '../models/Account.model.js';
 
 export class AccountService {
   async upsert({

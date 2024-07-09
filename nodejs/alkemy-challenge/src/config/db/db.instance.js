@@ -1,6 +1,3 @@
-import { config } from 'dotenv';
-config();
-
 import { Sequelize } from 'sequelize';
 import { envs } from '../env.js';
 

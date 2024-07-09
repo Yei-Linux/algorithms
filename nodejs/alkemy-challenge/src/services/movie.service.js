@@ -1,3 +1,4 @@
+import { NotFoundError } from '../errors/not-found.error.js';
 import { CharactersModel } from '../models/Characters.model.js';
 import { MoviesModel } from '../models/Movies.model.js';
 
@@ -13,6 +14,10 @@ export class MovieService {
         },
       },
     });
+
+    if (!movieWithCharacters) {
+      throw new NotFoundError('Movie not found');
+    }
 
     return movieWithCharacters;
   }

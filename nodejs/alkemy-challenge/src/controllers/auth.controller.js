@@ -7,10 +7,10 @@ export class AuthController {
     this.authService = new AuthService();
   }
 
-  signup = (req, res, next) => {
+  signup = async (req, res, next) => {
     try {
       const body = req.body;
-      const user = this.authService.createUser(body);
+      const user = await this.authService.createUser(body);
       res.status(200).send({ data: user });
     } catch (error) {
       next(error);

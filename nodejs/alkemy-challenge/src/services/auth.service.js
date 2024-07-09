@@ -1,5 +1,5 @@
-import { NotFoundError } from '../errors/not-found.error';
-import { UsersModel } from '../models/Users.model';
+import { NotFoundError } from '../errors/not-found.error.js';
+import { UsersModel } from '../models/Users.model.js';
 
 export class AuthService {
   async createUser(user) {

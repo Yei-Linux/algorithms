@@ -2,7 +2,7 @@ import { BadRequestError } from '../errors/bad-request.error.js';
 
 export const errorMiddleware = (error, req, res, next) => {
   if (!error) {
-    res.status(200).send('Request completed');
+    return res.status(200).send('Request completed');
   }
 
   const { message } = compose(
